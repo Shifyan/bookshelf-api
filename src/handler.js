@@ -78,11 +78,19 @@ const getAllBooks = (request, h) => {
       .code(200);
     return response;
   }
+  const filteredData = books.map((book) => {
+    const data = {
+      id: book.id,
+      name: book.name,
+      publisher: book.publisher,
+    };
+    return data;
+  });
   const response = h
     .response({
       status: "success",
       data: {
-        books: books,
+        books: filteredData,
       },
     })
     .code(200);
@@ -190,7 +198,7 @@ const deleteBook = (request, h) => {
     books.splice(booksIndex, 1);
     const response = h
       .response({
-        status: "Success",
+        status: "success",
         message: "Buku berhasil dihapus",
       })
       .code(200);
